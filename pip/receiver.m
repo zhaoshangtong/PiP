@@ -267,10 +267,10 @@ void airplay_receiver_start(void){
   NSLog(@"hw_addr: %02x:%02x:%02x:%02x:%02x:%02x", hw_addr[0], hw_addr[1], hw_addr[2], hw_addr[3], hw_addr[4], hw_addr[5]);
 
   char server_name[64] = {0};
-  int rc = snprintf(server_name, sizeof(server_name) - 1, "%s", "PiP");
+  int rc = snprintf(server_name, sizeof(server_name) - 1, "%s", "LingHang-Airplay");
 
   struct utsname buf;
-  if(uname(&buf) == 0) rc += snprintf(server_name + rc, sizeof(server_name) - 1 - rc, "@%s", buf.nodename);
+//  if(uname(&buf) == 0) rc += snprintf(server_name + rc, sizeof(server_name) - 1 - rc, "@%s", buf.nodename);
   dnssd = dnssd_init(server_name, rc, (char*)hw_addr, sizeof(hw_addr), &error);
   if(error){
     NSLog(@"Could not initialize dnssd library, error: %d", error);

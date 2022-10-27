@@ -33,7 +33,7 @@ INC_IMG(pop_out);
 INC_IMG(display);
 INC_IMG(windows);
 
-#define DEFAULT_TITLE @"(right click to begin)"
+#define DEFAULT_TITLE @"Main"
 
 static CGRect kStartRect = {
   .origin = {.x = 0, .y = 0,},
@@ -55,27 +55,32 @@ static bool isInside(int rad, CGPoint cirlce, CGPoint point){
 }
 
 static void setWindowSize(NSWindow* window, NSRect windowRect, NSRect screenRect, NSSize size, bool animate){
-  float screenWidth = screenRect.origin.x + screenRect.size.width;
-  float screenHeight = screenRect.origin.y + screenRect.size.height;
+//  float screenWidth = screenRect.origin.x + screenRect.size.width;
+//  float screenHeight = screenRect.origin.y + screenRect.size.height;
+  
+//  直接最大化，且居中显示
+  windowRect.size = NSMakeSize((screenRect.size.height/size.height)*size.width,screenRect.size.height);
+  windowRect.origin.x = screenRect.size.width/2 - windowRect.size.width/2;
+  windowRect.origin.y = screenRect.origin.y;
+    
+//  if(windowRect.origin.x + windowRect.size.width == screenWidth)
+//    windowRect.origin.x += windowRect.size.width - size.width;
+//  else{
+//    float clippingWidth = screenWidth - (windowRect.origin.x + size.width);
+//    if(clippingWidth < 0) windowRect.origin.x += clippingWidth;
+//  }
 
-  if(windowRect.origin.x + windowRect.size.width == screenWidth)
-    windowRect.origin.x += windowRect.size.width - size.width;
-  else{
-    float clippingWidth = screenWidth - (windowRect.origin.x + size.width);
-    if(clippingWidth < 0) windowRect.origin.x += clippingWidth;
-  }
+//  if(windowRect.origin.y + windowRect.size.height == screenHeight)
+//    windowRect.origin.y += windowRect.size.height - size.height;
+//  else{
+//    float clippingHeight = screenHeight - (windowRect.origin.y + size.height);
+//    if(clippingHeight < 0) windowRect.origin.y += clippingHeight;
+//  }
 
-  if(windowRect.origin.y + windowRect.size.height == screenHeight)
-    windowRect.origin.y += windowRect.size.height - size.height;
-  else{
-    float clippingHeight = screenHeight - (windowRect.origin.y + size.height);
-    if(clippingHeight < 0) windowRect.origin.y += clippingHeight;
-  }
+//  if(windowRect.origin.x < screenRect.origin.x) windowRect.origin.x = screenRect.origin.x;
+//  if(windowRect.origin.y < screenRect.origin.y) windowRect.origin.y = screenRect.origin.y;
 
-  if(windowRect.origin.x < screenRect.origin.x) windowRect.origin.x = screenRect.origin.x;
-  if(windowRect.origin.y < screenRect.origin.y) windowRect.origin.y = screenRect.origin.y;
-
-  windowRect.size = size;
+  
 
   [window setFrame:windowRect display:YES animate:animate];
 }
@@ -456,7 +461,8 @@ static NSImage* get_rel_image(NSImage* img){
   self.movable = YES;
   self.delegate = self;
   self.releasedWhenClosed = NO;
-  self.level = NSFloatingWindowLevel;
+//  self.level = NSFloatingWindowLevel;
+  self.level = NSNormalWindowLevel;
   self.movableByWindowBackground = YES;
   self.titlebarAppearsTransparent = true;
 //  self.backgroundColor = NSColor.clearColor;

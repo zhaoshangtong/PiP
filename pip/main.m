@@ -59,14 +59,14 @@ item.keyEquivalentModifierMask = mask; \
   ADD_ITEM(@"Close", performClose:, @"w");
 
   INIT_MENU(@"Window");
-  ADD_SCALE_ITEM(1);
-  ADD_SCALE_ITEM(2);
-  ADD_SCALE_ITEM(3);
-  ADD_SEP();
-  ADD_SCALE_ITEM_INVERSE(2);
-  ADD_SCALE_ITEM_INVERSE(3);
-  ADD_SCALE_ITEM_INVERSE(4);
-  ADD_SEP();
+//  ADD_SCALE_ITEM(1);
+//  ADD_SCALE_ITEM(2);
+//  ADD_SCALE_ITEM(3);
+//  ADD_SEP();
+//  ADD_SCALE_ITEM_INVERSE(2);
+//  ADD_SCALE_ITEM_INVERSE(3);
+//  ADD_SCALE_ITEM_INVERSE(4);
+//  ADD_SEP();
   ADD_ITEM_MASK(@"Zoom", performZoom:, @"z", NSEventModifierFlagCommand | NSEventModifierFlagOption);
   ADD_ITEM(@"Fullscreen", toggleFullScreen:, @"f");
   ADD_ITEM(@"Minimize", performMiniaturize:, @"m");
@@ -129,7 +129,7 @@ item.keyEquivalentModifierMask = mask; \
   [app setActivationPolicy:NSApplicationActivationPolicyRegular];
   [app activateIgnoringOtherApps:YES];
   [self newWindow];
-//  [self showPreferencePanel:self];
+  //[self showPreferencePanel:self];
   #ifndef NO_AIRPLAY
   if([(NSNumber*)getPref(@"airplay") intValue] > 0) airplay_receiver_start();
   #endif
